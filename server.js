@@ -33,13 +33,13 @@ sequelize.authenticate()
   .catch(err => console.error('Error de conexión a la base de datos:', err));
   */
 
-  const express = require('express');
+const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const sequelize = require('./database/config');
 const pedidoRoutes = require('./routes/pedidos');
 const inventarioRoutes = require('./routes/inventario');
-
+const healthcheckRoutes = require('./routes/healtcheck')
 dotenv.config();
 
 const app = express(); // ✅ primero se crea la instancia
@@ -51,6 +51,7 @@ app.use(express.json());
 // Rutas
 app.use('/api/pedidos', pedidoRoutes);
 app.use('/api/inventario', inventarioRoutes);
+app.use('/api/healthcheck', healthcheckRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
