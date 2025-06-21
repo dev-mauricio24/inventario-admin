@@ -1,4 +1,4 @@
-const Pedido = require('../models/pedido');
+const Pedido = require('../models/pedido.js');
 const Inventario = require('../models/inventario.js');
 
 // Crear Pedido con validación de inventario
