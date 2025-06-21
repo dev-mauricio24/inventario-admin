@@ -16,13 +16,13 @@ pipeline {
 
     stage('Construir imagen Docker') {
       steps {
-        sh 'docker build -t $IMAGE_NAME .'
+        bat 'docker build -t $IMAGE_NAME .'
       }
     }
 
     stage('Desplegar contenedor') {
       steps {
-        sh '''
+        bat '''
           docker stop $CONTAINER_NAME || true
           docker rm $CONTAINER_NAME || true
           docker run -d \
