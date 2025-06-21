@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../database/config.js');
 
 
-const Inventario = sequelize.define('Inventario', {
+const inventario = sequelize.define('Inventario', {
   producto: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -19,4 +19,4 @@ const Inventario = sequelize.define('Inventario', {
   timestamps: false
 });
 
-module.exports = Inventario;
+module.exports = inventario;

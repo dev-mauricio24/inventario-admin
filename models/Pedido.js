@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/config');
+const sequelize = require('../database/config.js');
 
 
-const Pedido = sequelize.define('Pedido', {
+const pedido = sequelize.define('pedido', {
   cliente: {
     type: DataTypes.STRING,
     allowNull: false
@@ -28,4 +28,4 @@ const Pedido = sequelize.define('Pedido', {
   timestamps: false
 });
 
-module.exports = Pedido;
+module.exports = pedido;
