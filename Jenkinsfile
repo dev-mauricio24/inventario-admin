@@ -21,17 +21,23 @@ pipeline {
     }
 
     stage('Desplegar contenedor') {
-      steps {
-        bat '''
-          docker stop %CONTAINER_NAME% || exit /b 0
-          docker rm %CONTAINER_NAME% || exit /b 0
-          docker run -d ^
-          --name %CONTAINER_NAME% ^
-          -p %PORT%:%PORT% ^
-          %IMAGE_NAME%
-        '''
-      }
-    }
+  steps {
+    bat '''
+      @echo off
+      docker stop %CONTAINER_NAME%
+      if %ERRORLEVEL% NEQ 0 echo Contenedor no estaba corriendo.
+      
+      docker rm %CONTAINER_NAME%
+      if %ERRORLEVEL% NEQ 0 echo Contenedor no existía.
+      
+      docker run -d ^
+        --name %CONTAINER_NAME% ^
+        -p %PORT%:%PORT% ^
+        %IMAGE_NAME%
+    '''
+  }
+}
+
   }
 
   post {
