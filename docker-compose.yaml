@@ -11,6 +11,7 @@ services:
       - DB_USER=root
       - DB_PASS=001
       - DB_NAME=pedidosDB
+      - DB_PORT=3306
     depends_on:
       mysql:
         condition: service_healthy
@@ -25,10 +26,9 @@ services:
     image: mysql:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=001
-      - DB_NAME=pedidosDB
-      - DB_USER=appuser
-      - DB_PASS=apppassword
-      - DB_HOST=mysql
+      - MYSQL_DATABASE=pedidosDB
+      - MYSQL_USER=appuser
+      - MYSQL_PASSWORD=apppassword
     ports:
       - "3306:3306"
     volumes:
