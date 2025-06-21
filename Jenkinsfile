@@ -2,7 +2,6 @@ pipeline {
   agent any
 
   environment {
-    # Define variables used in the pipeline and docker-compose
     IMAGE_NAME = 'inventario-admin'
     COMPOSE_PROJECT_NAME = 'inventario-app'
     PORT = '3000'
