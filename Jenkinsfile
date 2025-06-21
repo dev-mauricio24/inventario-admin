@@ -23,11 +23,12 @@ pipeline {
     stage('Desplegar contenedor') {
       steps {
         bat '''
+          docker stop %CONTAINER_NAME% || exit /b 0
+          docker rm %CONTAINER_NAME% || exit /b 0
           docker run -d ^
-            --name %CONTAINER_NAME% ^
-            --network jenkins ^
-            -p %PORT%:%PORT% ^
-            %IMAGE_NAME%
+          --name %CONTAINER_NAME% ^
+          -p %PORT%:%PORT% ^
+          %IMAGE_NAME%
         '''
       }
     }
