@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Inventario = require('../models/Inventario.js');
+const Inventario = require('../models/inventario.js');
 
 // ✅ Obtener inventario
 router.get('/', async (req, res) => {

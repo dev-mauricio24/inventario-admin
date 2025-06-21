@@ -1,5 +1,5 @@
-const Pedido = require('../models/Pedido');
-const Inventario = require('../models/Inventario');
+const Pedido = require('../models/pedido');
+const Inventario = require('../models/inventario.js');
 
 // Crear Pedido con validación de inventario
 const crearPedido = async (req, res) => {

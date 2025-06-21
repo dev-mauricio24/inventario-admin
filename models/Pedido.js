@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/config');
 
+
 const Pedido = sequelize.define('Pedido', {
   cliente: {
     type: DataTypes.STRING,

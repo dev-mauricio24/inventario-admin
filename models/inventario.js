@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/config.js');
 
+
 const Inventario = sequelize.define('Inventario', {
   producto: {
     type: DataTypes.STRING,
