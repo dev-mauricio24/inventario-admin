@@ -36,10 +36,10 @@ sequelize.authenticate()
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const sequelize = require('./database/config');
-const pedidoRoutes = require('./routes/pedidos');
-const inventarioRoutes = require('./routes/inventario');
-const healthcheckRoutes = require('./routes/healtcheck')
+const sequelize = require('./database/config.js');
+const pedidoRoutes = require('./routes/pedidos.js');
+const inventarioRoutes = require('./routes/inventario.js');
+const healthcheckRoutes = require('./routes/healtcheck.js')
 dotenv.config();
 
 const app = express(); // ✅ primero se crea la instancia

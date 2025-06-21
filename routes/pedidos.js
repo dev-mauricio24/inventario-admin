@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pedidoController = require('../controllers/pedidoController');
+const pedidoController = require('../controllers/pedidoController.js');
 
 // Rutas correctas con funciones controladoras
 router.post('/', pedidoController.crearPedido);
