@@ -16,20 +16,20 @@ pipeline {
 
     stage('Construir imagen Docker') {
       steps {
-        bat 'docker build -t $IMAGE_NAME .'
+        bat 'docker build -t %IMAGE_NAME% .'
       }
     }
 
     stage('Desplegar contenedor') {
       steps {
         bat '''
-          docker stop $CONTAINER_NAME || true
-          docker rm $CONTAINER_NAME || true
-          docker run -d \
-            --name $CONTAINER_NAME \
-            --network jenkins \
-            -p $PORT:$PORT \
-            $IMAGE_NAME
+          docker stop %CONTAINER_NAME% || exit /b 0
+          docker rm %CONTAINER_NAME% || exit /b 0
+          docker run -d ^
+            --name %CONTAINER_NAME% ^
+            --network jenkins ^
+            -p %PORT%:%PORT% ^
+            %IMAGE_NAME%
         '''
       }
     }
