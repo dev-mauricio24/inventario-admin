@@ -25,14 +25,15 @@ services:
     image: mysql:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=001
-      - MYSQL_DATABASE=pedidosDB
-      - MYSQL_USER=appuser
-      - MYSQL_PASSWORD=apppassword
+      - DB_NAME=pedidosDB
+      - DB_USER=appuser
+      - DB_PASS=apppassword
+      - DB_HOST=mysql
     ports:
       - "3306:3306"
-    # volumes:
-    #   - mysql_data:/var/lib/mysql
-    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p001"]
       timeout: 20s
