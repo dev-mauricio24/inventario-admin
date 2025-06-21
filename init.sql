@@ -4,6 +4,10 @@ CREATE DATABASE IF NOT EXISTS pedidosDB;
 -- Seleccionar la base de datos
 USE pedidosDB;
 
+CREATE USER IF NOT EXISTS 'appuser'@'%' IDENTIFIED BY 'apppassword';
+GRANT ALL PRIVILEGES ON pedidosDB.* TO 'appuser'@'%';
+FLUSH PRIVILEGES;
+
 -- Crear tabla inventario
 CREATE TABLE IF NOT EXISTS inventario (
   id INT AUTO_INCREMENT PRIMARY KEY,
