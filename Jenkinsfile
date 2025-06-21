@@ -2,8 +2,9 @@ pipeline {
   agent any
 
   environment {
+    # Define variables used in the pipeline and docker-compose
     IMAGE_NAME = 'inventario-admin'
-    CONTAINER_NAME = 'inventario-app'
+    COMPOSE_PROJECT_NAME = 'inventario-app'
     PORT = '3000'
   }
 
@@ -14,38 +15,30 @@ pipeline {
       }
     }
 
-    stage('Construir imagen Docker') {
+    stage('Construir y desplegar con Docker Compose') {
       steps {
-        bat 'docker build -t %IMAGE_NAME% .'
+        bat '''
+          @echo off
+          :: Stop and remove existing containers
+          docker-compose down
+          
+          :: Build and start services using docker-compose
+          docker-compose up -d --build
+        '''
       }
     }
-
-    stage('Desplegar contenedor') {
-  steps {
-    bat '''
-      @echo off
-      docker stop %CONTAINER_NAME%
-      if %ERRORLEVEL% NEQ 0 echo Contenedor no estaba corriendo.
-      
-      docker rm %CONTAINER_NAME%
-      if %ERRORLEVEL% NEQ 0 echo Contenedor no existía.
-      
-      docker run -d ^
-        --name %CONTAINER_NAME% ^
-        -p %PORT%:%PORT% ^
-        %IMAGE_NAME%
-    '''
-  }
-}
-
   }
 
   post {
     success {
-      echo '✅ Despliegue exitoso con Docker'
+      echo '✅ Despliegue exitoso con Docker Compose'
     }
     failure {
       echo '❌ Error en el pipeline'
+      bat 'docker-compose down'
+    }
+    always {
+      echo 'Pipeline finalizado'
     }
   }
 }
